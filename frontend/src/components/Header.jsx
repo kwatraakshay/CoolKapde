@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   
   const {cartItems} = useSelector((state) => state.cart);
-  console.log(cartItems);
+  // console.log(cartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -62,6 +62,24 @@ const Header = () => {
                       </LinkContainer>
                     <NavDropdown.Item onClick={logoutHandler}>logout</NavDropdown.Item>
                   </NavDropdown>): (  <LinkContainer to='/login'><Nav.Link><FaUser/>&nbsp;User</Nav.Link></LinkContainer>)}
+                  
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title='Admin' id='adminmenu'>
+                      <LinkContainer to='/admin/productlist'>
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+
+                      <LinkContainer to='/admin/userlist'>
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+
+                      <LinkContainer to='/admin/orderlist'>
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+
+                    </NavDropdown>
+                  )}
+                
                 </Nav>
             </Navbar.Collapse>
         </Container>
